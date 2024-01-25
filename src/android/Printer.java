@@ -24,6 +24,7 @@ package de.appplant.cordova.plugin.printer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.webkit.WebView;
+import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -124,13 +125,13 @@ public final class Printer extends CordovaPlugin
     private void print (@Nullable String content, JSONObject settings,
                         CallbackContext callback)
     {
-        System.out.println("APDebug: in plugin printer print method");
+        Log.d("APDebug: in plugin printer print method");
         cordova.getThreadPool().execute(() -> {
             PrintManager pm = new PrintManager(cordova.getContext());
             //WebView view    = (WebView) webView.getView();
 
             //pm.print(content, settings, view, (boolean completed) -> sendPluginResult(callback, completed));
-            System.out.println("APDebug: got print manager: " + pm.toString() );
+            Log.d("APDebug: got print manager: " + pm.toString() );
             pm.print(content, settings, (boolean completed) -> sendPluginResult(callback, completed));
         });
     }
