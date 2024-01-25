@@ -363,7 +363,14 @@ class PrintManager
     @NonNull
     private android.print.PrintManager getPrintService()
     {
-        return (android.print.PrintManager) context.getSystemService(PRINT_SERVICE);
+        android.print.PrintManager printService = (android.print.PrintManager) context.getSystemService(PRINT_SERVICE);
+        if( printService == null) {
+            System.out.println("AbsencePlannerDebug: printService is null");
+        }
+        else {
+            System.out.println("AbsencePlannerDebug: printService: " + printService.toString());
+        }
+        return printService;
     }
 
     interface OnPrintFinishCallback
