@@ -40,6 +40,8 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 
+import de.appplant.cordova.plugin.printer.PrintContent.ContentType;
+
 import static android.content.Context.PRINT_SERVICE;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.print.PrintJobInfo.STATE_COMPLETED;
@@ -117,6 +119,8 @@ class PrintManager
     void print (@Nullable String content, @NonNull JSONObject settings,
                 @NonNull OnPrintFinishCallback callback)
     {
+        ContentType cType = PrintContent.getContentType(content, context);
+        System.out.println("APDebug: ContentType " + cType.name() );
         switch (PrintContent.getContentType(content, context))
         {
             case IMAGE:
@@ -243,6 +247,7 @@ class PrintManager
     {
         InputStream stream    = PrintContent.open(path, context);
 
+        System.out.println("APDebug: In printPDF function. Stream is " + (stream == null) );
         if (stream == null) return;
 
         PrintOptions options  = new PrintOptions(settings);
@@ -262,8 +267,10 @@ class PrintManager
     private void printAdapter (@NonNull PrintDocumentAdapter adapter,
                                @NonNull PrintOptions options)
     {
+        System.out.println("APDebug: In printAdapter function");
         String jobName        = options.getJobName();
         PrintAttributes attrs = options.toPrintAttributes();
+
 
         getPrintService().print(jobName, adapter, attrs);
     }
@@ -365,10 +372,10 @@ class PrintManager
     {
         android.print.PrintManager printService = (android.print.PrintManager) context.getSystemService(PRINT_SERVICE);
         if( printService == null) {
-            System.out.println("AbsencePlannerDebug: printService is null");
+            System.out.println("APDebug: printService is null");
         }
         else {
-            System.out.println("AbsencePlannerDebug: printService: " + printService.toString());
+            System.out.println("APDebug: printService: " + printService.toString());
         }
         return printService;
     }
