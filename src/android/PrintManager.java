@@ -121,7 +121,7 @@ class PrintManager
                 @NonNull OnPrintFinishCallback callback)
     {
         ContentType cType = PrintContent.getContentType(content, context);
-        Log.d("APDebug: ContentType " + cType.name() );
+        Log.d("APDebug", "ContentType " + cType.name() );
         switch (PrintContent.getContentType(content, context))
         {
             case IMAGE:
@@ -248,7 +248,7 @@ class PrintManager
     {
         InputStream stream    = PrintContent.open(path, context);
 
-        Log.d("APDebug: In printPDF function. Stream is " + (stream == null) );
+        Log.d("APDebug", "In printPDF function. Stream is " + (stream == null) );
         if (stream == null) return;
 
         PrintOptions options  = new PrintOptions(settings);
@@ -268,7 +268,7 @@ class PrintManager
     private void printAdapter (@NonNull PrintDocumentAdapter adapter,
                                @NonNull PrintOptions options)
     {
-        Log.d("APDebug: In printAdapter function");
+        Log.d("APDebug", "In printAdapter function");
         String jobName        = options.getJobName();
         PrintAttributes attrs = options.toPrintAttributes();
 
@@ -373,10 +373,10 @@ class PrintManager
     {
         android.print.PrintManager printService = (android.print.PrintManager) context.getSystemService(PRINT_SERVICE);
         if( printService == null) {
-            Log.d("APDebug: printService is null");
+            Log.d("APDebug", "printService is null");
         }
         else {
-            Log.d("APDebug: printService: " + printService.toString());
+            Log.d("APDebug", "printService: " + printService.toString());
         }
         return printService;
     }

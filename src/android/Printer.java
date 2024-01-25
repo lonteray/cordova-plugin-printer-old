@@ -125,13 +125,13 @@ public final class Printer extends CordovaPlugin
     private void print (@Nullable String content, JSONObject settings,
                         CallbackContext callback)
     {
-        Log.d("APDebug: in plugin printer print method");
+        Log.d("APDebug", "in plugin printer print method");
         cordova.getThreadPool().execute(() -> {
             PrintManager pm = new PrintManager(cordova.getContext());
             //WebView view    = (WebView) webView.getView();
 
             //pm.print(content, settings, view, (boolean completed) -> sendPluginResult(callback, completed));
-            Log.d("APDebug: got print manager: " + pm.toString() );
+            Log.d("APDebug", "got print manager: " + pm.toString() );
             pm.print(content, settings, (boolean completed) -> sendPluginResult(callback, completed));
         });
     }
