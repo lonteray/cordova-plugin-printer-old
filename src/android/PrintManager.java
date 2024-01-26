@@ -115,7 +115,7 @@ class PrintManager
      */
     @SuppressWarnings("ConstantConditions")
     void print (@Nullable String content, @NonNull JSONObject settings,
-                @NonNull WebView view, @NonNull OnPrintFinishCallback callback)
+                @NonNull OnPrintFinishCallback callback)
     {
         switch (PrintContent.getContentType(content, context))
         {
@@ -125,17 +125,13 @@ class PrintManager
             case PDF:
                 printPdf(content, settings, callback);
                 break;
-            case HTML:
-                if (content == null || content.isEmpty()) {
-                    printWebView(view, settings, callback);
-                } else {
-                    printHtml(content, settings, callback);
-                }
-                break;
             case UNSUPPORTED:
                 // TODO unsupported content
             case PLAIN:
                 printText(content, settings, callback);
+                break;
+            default:
+                break;
         }
     }
 
